@@ -10,6 +10,8 @@ Key Terms:
 
 ## The General Process
 
+Turn both the computer and Burger on. Make sure the Burger is charged ahead of time. If the Burger begins beeping, it is likely that the battery is low and the Burger will need to be recharged.
+
 In the terminal run `roscore` and wait for the process to finish. This will not indicate completion with another type prompt, roscore is considered fully launched when no more text is printed to the terminal. DO NOT PRESS ctrl+C OR CLOSE THIS TERMINAL. LEAVE THIS TERMINAL OPEN. 
 
 Remaining on the Computer, open a new terminal (ctrl+alt+t) and type `ssh pi@<IP of Burger>` replacing <*IP of Burger*> with the IP of the Burger.
@@ -55,3 +57,8 @@ Open a terminal on the device (ctrl+alt+t). Type `ifconfig`. Towards the bottom 
 Whenever launching a package, turtlebot3 requires the user to first define the model of robot they are using with `export TURTLEBOT3_MODEL=${TB3_MODEL}` where ${TB3_MODEL} is replaced with the robot's model (burger, waffle, or waffle_pi). In order to skip this step the user can predefine the turtlebot3's model.
 
 First, connect to the Burger as shown above. Then type `echo 'export TURTLEBOT3_MODEL=${TB3_MODEL}' >> ~/.bashrc` into the terminal replacing ${TB3_MODEL} with the appropriate model (in our case we use `echo 'export TURTLEBOT3_MODEL=burger' >> ~/.bashrc`) and hit enter. Next, type `source ~/.bashrc` to activate the changes made. Now the model has been predefined.
+
+### Unable to Contact My Own Server or 100% Packet Loss
+For when `ping <IP>` or `roscore` fails, check to see if the IPs of the devices are correct.
+
+In a terminal on the Computer, find the IP address with `ifconfig`. Staying on the Computer, open a second terminal and type `nano ~/.bashrc`, scroll down and check if the master URI and host name IPs' match the Computer's current IP. Press ctrl+x and save if any changes were made. Next, access a terminal on the monitor and find the Burger's IP address. Compare it to the IP address in `nano ~/.bashrc`. Reference **Using A New Network** above for the correct placement of each IP address. Exit the bashrc file and save any changes.
