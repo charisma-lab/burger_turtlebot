@@ -42,11 +42,16 @@ export ROS_HOSTNAME=<IP of Burger>
 
 To finish, complete the General Process as decribed above.
 
+### Error `alias not found` 
+For when `nano ~/.bashrc` works but `source ~/.bashrc` throws an alias error.
+Re-enter `nano ~/.bashrc` and check all lines in the bashrc file to see if an alias line is spelled wrong. (e.g. `lias` instead of `alias`).
+
 ### Finding an IP Address
 Every device has a unique IP address when it connects to a network. This address will change between different networks. To check the IP address of a device follow these steps:
 
 Open a terminal on the device (ctrl+alt+t). Type `ifconfig`. Towards the bottom of the text printed to the terminal will be a line starting with "inet addr:", the string of numbers afterwards is the IP address of the device.
 
-### Error `alias not found` 
-For when `nano ~/.bashrc` works but `source ~/.bashrc` throws an alias error.
-Re-enter `nano ~/.bashrc` and check all lines in the bashrc file to see if an alias line is spelled wrong. (e.g. `lias` instead of `alias`).
+### Predefining the Turtlebot3's Model
+Whenever launching a package, turtlebot3 requires the user to first define the model of robot they are using with `export TURTLEBOT3_MODEL=${TB3_MODEL}` where ${TB3_MODEL} is replaced with the robot's model (burger, waffle, or waffle_pi). In order to skip this step the user can predefine the turtlebot3's model.
+
+First, connect to the Burger as shown above. Then type `echo 'export TURTLEBOT3_MODEL=${TB3_MODEL}' >> ~/.bashrc` into the terminal replacing ${TB3_MODEL} with the appropriate model (in our case we use `echo 'export TURTLEBOT3_MODEL=burger' >> ~/.bashrc`) and hit enter. Next, type `source ~/.bashrc` to activate the changes made. Now the model has been predefined.
