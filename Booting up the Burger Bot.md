@@ -10,9 +10,9 @@ Key Terms:
 
 ## The General Process
 
-First, connect to the Burger. In the terminal on the Computer, type `ssh pi@<IP of Burger>` replacing <*IP of Burger*> with the IP of the Burger. 
+In the terminal run `roscore` and wait for the process to finish. This will not indicate completion with another type prompt, roscore is considered fully launched when no more text is printed to the terminal. DO NOT PRESS ctrl+C OR CLOSE THIS TERMINAL. LEAVE THIS TERMINAL OPEN. 
 
-Remaining on the Computer and in the terminal run `roscore` and wait for the process to finish. This will not indicate completion with another type prompt, roscore is considered fully launched when no more text is printed to the terminal. DO NOT PRESS ctrl+C OR CLOSE THIS TERMINAL. LEAVE THIS TERMINAL OPEN.
+Remaining on the Computer, open a new terminal (ctrl+alt+t) and type `ssh pi@<IP of Burger>` replacing <*IP of Burger*> with the IP of the Burger.
 
 Finally, bringup the Burger. Open a new terminal on the Computer and type `roslaunch turtlebot3_bringup turtlebot3_robot.launch`. Hit enter and the terminal will begin printing text. The bringup process has completed once the line `[INFO] [a string of numbers]: Calibration End` has appeared (where "a string of numbers" is a values such as ##########.######). DO NOT PRESS ctrl+C OR CLOSE THIS TERMINAL. LEAVE THIS TERMINAL OPEN.
 
