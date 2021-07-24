@@ -53,6 +53,18 @@ Every device has a unique IP address when it connects to a network. This address
 
 Open a terminal on the device (ctrl+alt+t). Type `ifconfig`. Towards the bottom of the text printed to the terminal will be a line starting with "inet addr:", the string of numbers afterwards is the IP address of the device.
 
+### Making a Package
+This tutorial will closely follow the tutorial from [the ROS website](http://wiki.ros.org/ROS/Tutorials/CreatingPackage) but with less explanation.
+1. Assuming a catkin_ws workspace is already set up, enter your source file using `cd ~/catkin_ws/src`.
+2. Create the package using `catkin_create_pkg <package_name> [depend1] [depend2]`. As an example, to create a package with the name "beginner_tutorials" and the dependencies std_msgs, rospy, and roscpp would look like `catkin_create_pkg beginner_tutorials std_msgs rospy roscpp`.
+3. Back out to the workspace with `cd ~/catkin_ws`.
+4. Run `catkin_make`.
+5. Run `. ~/catkin_ws/devel/setup.bash` to source the generated setup file.
+6. \[OPTIONAL STEP\] Set up your package.xml with a description, maintainer tag, etc. To update these enter the package.xml file in your package and alter any necessary tags.  At the very least we recommend updating the description and author tags. An update to the maintainer tag would look like `<maintainer email="you@yourdomain.tld">Your Name</maintainer>` to `<maintainer email="charisma@beanloaf.beans">Charisma Labs</maintainer>`.
+7. Run `source /opt/ros/kinetic/setup.bash`. If you are using a version other than kinetic, replace "kinetic" with your version.
+8. Backout into your catking_ws using `cd ~/catkin_ws` or `cd ..` until in catkin_ws.
+9. Run `catkin_make <package_name>` replacing <package_name> with your package's name.
+
 ### Predefining the Turtlebot3's Model
 Whenever launching a package, turtlebot3 requires the user to first define the model of robot they are using with `export TURTLEBOT3_MODEL=${TB3_MODEL}` where ${TB3_MODEL} is replaced with the robot's model (burger, waffle, or waffle_pi). In order to skip this step the user can predefine the turtlebot3's model.
 
