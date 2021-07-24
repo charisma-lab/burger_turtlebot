@@ -64,6 +64,11 @@ This tutorial will closely follow the tutorial from [the ROS website](http://wik
 7. Run `source /opt/ros/kinetic/setup.bash`. If you are using a version other than kinetic, replace "kinetic" with your version.
 8. Backout into your catking_ws using `cd ~/catkin_ws` or `cd ..` until in catkin_ws.
 9. Run `catkin_make <package_name>` replacing <package_name> with your package's name.
+10. Create a file (in our case a .py file) inside of the source of the new package. This can be done by opening pycharm,, using the directory in pycharm to enter the src folder in your new package, and then creating a new python file.
+11. Run `source catkin_ws/devel/setup.bash`.
+12. Run `chmod 777 <.py_file_name>`.
+13. Run `ls -la` to verify that the .py file is now executable. The file should have an x on the same line as the file name. 
+14. To run the .py file run `rosrun <package_name> <.py_file_name>`.
 
 ### Predefining the Turtlebot3's Model
 Whenever launching a package, turtlebot3 requires the user to first define the model of robot they are using with `export TURTLEBOT3_MODEL=${TB3_MODEL}` where ${TB3_MODEL} is replaced with the robot's model (burger, waffle, or waffle_pi). In order to skip this step the user can predefine the turtlebot3's model.
