@@ -53,8 +53,8 @@ Every device has a unique IP address when it connects to a network. This address
 
 Open a terminal on the device (ctrl+alt+t). Type `ifconfig`. Towards the bottom of the text printed to the terminal will be a line starting with "inet addr:", the string of numbers afterwards is the IP address of the device.
 
-### Making a Package
-This tutorial will closely follow the tutorial from [the ROS website](http://wiki.ros.org/ROS/Tutorials/CreatingPackage) but with less explanation.
+### \[WIP\] Making a Package
+This tutorial will closely follow the tutorial from [the ROS website](http://wiki.ros.org/ROS/Tutorials/CreatingPackage) but with less explanation and combined with [this](http://wiki.ros.org/ROS/Tutorials/WritingPublisherSubscriber%28python%29) article on setting up publisher and subcriber nodes.
 1. Assuming a catkin_ws workspace is already set up, enter your source file using `cd ~/catkin_ws/src`.
 2. Create the package using `catkin_create_pkg <package_name> [depend1] [depend2]`. As an example, to create a package with the name "beginner_tutorials" and the dependencies std_msgs, rospy, and roscpp would look like `catkin_create_pkg beginner_tutorials std_msgs rospy roscpp`.
 3. Back out to the workspace with `cd ~/catkin_ws`.
@@ -64,11 +64,13 @@ This tutorial will closely follow the tutorial from [the ROS website](http://wik
 7. Run `source /opt/ros/kinetic/setup.bash`. If you are using a version other than kinetic, replace "kinetic" with your version.
 8. Backout into your catking_ws using `cd ~/catkin_ws` or `cd ..` until in catkin_ws.
 9. Run `catkin_make <package_name>` replacing <package_name> with your package's name.
-10. Create a file (in our case a .py file) inside of the source of the new package. This can be done by opening pycharm,, using the directory in pycharm to enter the src folder in your new package, and then creating a new python file.
-11. Run `source catkin_ws/devel/setup.bash`.
-12. Run `chmod 777 <.py_file_name>`.
-13. Run `ls -la` to verify that the .py file is now executable. The file should have an x on the same line as the file name. 
-14. To run the .py file run `rosrun <package_name> <.py_file_name>`.
+10. Enter the package with `cd ~/catkin_ws/src/<package_name>`.
+11. Create a 'scripts' folder by running `mkdir scripts` and then enter the folder with `cd scripts`.
+12. Create a file (in our case a .py file) inside of the scripts folder in step 11. This can be done by opening a code editor (i.e. pycharm or vscode, we will be using vscode), using the directory to enter the scripts folder in your new package, and then creating a new file in your choice of language (we will use python2).
+13. Run `source catkin_ws/devel/setup.bash`.
+14. Run `chmod +x <.py_file_name>`.
+15. Run `ls -la` to verify that the .py file is now executable. The file should have an x in the discriptor on the same line as the file name. 
+16. To run the .py file run `rosrun <package_name> <.py_file_name>`.
 
 ### Predefining the Turtlebot3's Model
 Whenever launching a package, turtlebot3 requires the user to first define the model of robot they are using with `export TURTLEBOT3_MODEL=${TB3_MODEL}` where ${TB3_MODEL} is replaced with the robot's model (burger, waffle, or waffle_pi). In order to skip this step the user can predefine the turtlebot3's model.
