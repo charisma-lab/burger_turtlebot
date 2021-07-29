@@ -6,7 +6,9 @@ Key Terms:
 - **the Burger** - the physical robot, a Burger model of the TurtleBot3 series.
 - **the Computer** - the main computer which will remotely be controlling the robot, also known as the Remote PC
 
-*Disclaimer: While this tutorial may work with other TurtleBot3 robots, we do not guarantee this as this guide was written specifically for the Burger model robot. This tutorial will be using Ubuntu and ROS Kinetic and was writtin in 2021.*
+Additionally, the **Trouble Shooting, Mini Guides, and More** section below can be used to help resolve some issues we have run into as well as how to develop new packages and other starter concerns.
+
+*Disclaimer: While this tutorial may work with other TurtleBot3 robots, we do not guarantee this as this guide was written specifically for the TurtleBot3 Burger model of robot. This tutorial will be using Ubuntu/Linux, ROS Kinetic, GitHub, Python2.7, and VSCode and was writtin in 2021.*
 
 ## The General Process
 
@@ -66,7 +68,7 @@ This tutorial will closely follow the tutorial from [the ROS website](http://wik
 9. Run `catkin_make <package_name>` replacing <package_name> with your package's name.
 10. Enter the package with `cd ~/catkin_ws/src/<package_name>`.
 11. Create a 'scripts' folder by running `mkdir scripts` and then enter the folder with `cd scripts`.
-12. Create a file (in our case a .py file) inside of the scripts folder in step 11. This can be done by opening a code editor (i.e. pycharm or vscode, we will be using vscode), using the directory to enter the scripts folder in your new package, and then creating a new file in your choice of language (we will use python2).
+12. Create a file (in our case a .py file) inside of the scripts folder from step 11. This can be done by opening a code editor (i.e. pycharm or vscode), using the directory to enter into the scripts folder in your new package, and then creating a new file in your choice of language.
 13. Run `source catkin_ws/devel/setup.bash`.
 14. Run `chmod +x <.py_file_name>`.
 15. Run `ls -la` to verify that the .py file is now executable. The file should have an x in the discriptor on the same line as the file name. 
