@@ -20,18 +20,19 @@ def __init__(self):
 
 ###
 # line line pathway option
+# For now, only working with lineline() function to get prublisher subscriber working, ignore contents of other functions
 ###
-def lineline(self): 
+def lineline(): 
     speed, timer = userInput()
     if speed == "slow":
-        self._robot.setMotors(0, 200, 50)
+        print("Lineline slow")
         sleep(20)
     elif speed == "fast":
-        self._robot.setMotors(0, 200, 200)
+        print("Lineline fast")
         sleep(5)
     else:
         #line line acceleration, how to calculate?
-        self._robot.setMotors(0, 200, speed)
+        print("Lineline acceleration")
         sleep(timer)
 
 ###
@@ -82,6 +83,7 @@ def userInput():
         timer=10
     else:
         timer=30
+    timer = int(timer) #to resolve type issues
     return (speed, timer)
 
 def run():
@@ -91,19 +93,17 @@ def run():
             #get user input on path
             path = raw_input("Enter path style: ")
 
-            robot = BurgerNode()
             if path == "lineline":
-                robot.lineline()
+                lineline()
             elif path == "sineline":
-                robot.sineline()
+                sineline()
             elif path == "sinesine":
-                robot.sinesine()
+                sinesine()
             else:
                 print("Invalid path choice. Please choose again. To terminate the code press ctrl+c.")
 
 if __name__ == '__main__':
     try:
         run()
-        except rospy.ROSInterruptException:
-            pass
-    
+    except rospy.ROSInterruptException:
+        pass
