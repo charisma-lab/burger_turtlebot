@@ -1,0 +1,4 @@
+<launch>
+	<node name="computer" pkg="reu_summer_2021" type="feeding_style" />
+	<node name="burger" pkg="reu_summer_2021" type="burger_sub" />
+</launch>
