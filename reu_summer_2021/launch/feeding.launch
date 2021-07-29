@@ -1,4 +1,4 @@
 <launch>
-	<node name="computer" pkg="reu_summer_2021" type="feeding_style" />
-	<node name="burger" pkg="reu_summer_2021" type="burger_sub" />
+	<node pkg="reu_summer_2021" name="feeding_style" type="feeding_style.py" cwd="node" />
+	<node pkg="reu_summer_2021" name="burger_sub" type="burger_sub.py" cwd="node" />
 </launch>
