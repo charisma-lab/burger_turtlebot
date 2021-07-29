@@ -6,7 +6,9 @@ Key Terms:
 - **the Burger** - the physical robot, a Burger model of the TurtleBot3 series.
 - **the Computer** - the main computer which will remotely be controlling the robot, also known as the Remote PC
 
-*Disclaimer: While this tutorial may work with other TurtleBot3 robots, we do not guarantee this as this guide was written specifically for the Burger model robot. This tutorial will be using Ubuntu and ROS Kinetic and was writtin in 2021.*
+Additionally, the **Trouble Shooting, Mini Guides, and More** section below can be used to help resolve some issues we have run into as well as how to develop new packages and other starter concerns.
+
+*Disclaimer: While this tutorial may work with other TurtleBot3 robots, we do not guarantee this as this guide was written specifically for the TurtleBot3 Burger model of robot. This tutorial will be using Ubuntu/Linux, ROS Kinetic, GitHub, Python2.7, and VSCode and was writtin in 2021.*
 
 ## The General Process
 
@@ -66,7 +68,7 @@ This tutorial will closely follow the tutorial from [the ROS website](http://wik
 9. Run `catkin_make <package_name>` replacing <package_name> with your package's name.
 10. Enter the package with `cd ~/catkin_ws/src/<package_name>`.
 11. Create a 'scripts' folder by running `mkdir scripts` and then enter the folder with `cd scripts`.
-12. Create a file (in our case a .py file) inside of the scripts folder in step 11. This can be done by opening a code editor (i.e. pycharm or vscode, we will be using vscode), using the directory to enter the scripts folder in your new package, and then creating a new file in your choice of language (we will use python2).
+12. Create a file (in our case a .py file) inside of the scripts folder from step 11. This can be done by opening a code editor (i.e. pycharm or vscode), using the directory to enter into the scripts folder in your new package, and then creating a new file in your choice of language.
 13. Run `source catkin_ws/devel/setup.bash`.
 14. Run `chmod +x <.py_file_name>`.
 15. Run `ls -la` to verify that the .py file is now executable. The file should have an x in the discriptor on the same line as the file name. 
@@ -76,6 +78,22 @@ This tutorial will closely follow the tutorial from [the ROS website](http://wik
 Whenever launching a package, turtlebot3 requires the user to first define the model of robot they are using with `export TURTLEBOT3_MODEL=${TB3_MODEL}` where ${TB3_MODEL} is replaced with the robot's model (burger, waffle, or waffle_pi). In order to skip this step the user can predefine the turtlebot3's model.
 
 First, connect to the Burger as shown above. Then type `echo 'export TURTLEBOT3_MODEL=${TB3_MODEL}' >> ~/.bashrc` into the terminal replacing ${TB3_MODEL} with the appropriate model (in our case we use `echo 'export TURTLEBOT3_MODEL=burger' >> ~/.bashrc`) and hit enter. Next, type `source ~/.bashrc` to activate the changes made. Now the model has been predefined.
+
+### Pushing a Whole New Package to a Premade GitHub Repository
+To push an existing project to a new repository on GitHub, please follow [these](https://docs.github.com/en/github/importing-your-projects-to-github/importing-source-code-to-github/adding-an-existing-project-to-github-using-the-command-line) instructions. The instructions below are to push an existing project to an already made repo.
+1. Open the repo on github.com.
+2. Click on the green button to the top right of the files list that says "code" and select the clipboard icon next to the https link to copy the link.
+3. Open a terminal (ctrl+alt+t).
+4. Change the directory into where you wish to clone the repo. We suggest using `cd catkin_ws`, then `cd src` and cloning here.
+5. Clone the repository onto the computer with `git clone <repo_link>` replacing <repo_link> with the link copied from the step above.
+6. Backout to the root of your package (if you are working in catkin_ws the command to use is `cd catkin_ws`).
+7. Recompile your package with `catkin_make <package_name>`.
+8. Enter the repo using `roscd <repo_name>` or cd commands.
+9. Run `git status`, the name of your package should appear in red text.
+10. Run `git add *` or `git add <package_name>` to add your package to the repo. Note: the command with '\*' will add all files not currently in the repo while the command with the package name will only add the specified package or file.
+11. Run `git status` to verify your package has been added to the repo.
+12. Run `git commit -m "<commit_message>"` replacing <commit_message> with a description of what you are committing to the repo.
+13. Run `git push`. 
 
 ### Unable to Contact My Own Server or 100% Packet Loss
 For when `ping <IP>` or `roscore` fails, check to see if the IPs of the devices are correct.
