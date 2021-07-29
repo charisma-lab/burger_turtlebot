@@ -77,6 +77,22 @@ Whenever launching a package, turtlebot3 requires the user to first define the m
 
 First, connect to the Burger as shown above. Then type `echo 'export TURTLEBOT3_MODEL=${TB3_MODEL}' >> ~/.bashrc` into the terminal replacing ${TB3_MODEL} with the appropriate model (in our case we use `echo 'export TURTLEBOT3_MODEL=burger' >> ~/.bashrc`) and hit enter. Next, type `source ~/.bashrc` to activate the changes made. Now the model has been predefined.
 
+### Pushing a Whole New Package to a Premade GitHub Repository
+To push an existing project to a new repository on GitHub, please follow [these](https://docs.github.com/en/github/importing-your-projects-to-github/importing-source-code-to-github/adding-an-existing-project-to-github-using-the-command-line) instructions. The instructions below are to push an existing project to an already made repo.
+1. Open the repo on github.com.
+2. Click on the green button to the top right of the files list that says "code" and select the clipboard icon next to the https link to copy the link.
+3. Open a terminal (ctrl+alt+t).
+4. Change the directory into where you wish to clone the repo. We suggest using `cd catkin_ws`, then `cd src` and cloning here.
+5. Clone the repository onto the computer with `git clone <repo_link>` replacing <repo_link> with the link copied from the step above.
+6. Backout to the root of your package (if you are working in catkin_ws the command to use is `cd catkin_ws`).
+7. Recompile your package with `catkin_make <package_name>`.
+8. Enter the repo using `roscd <repo_name>` or cd commands.
+9. Run `git status`, the name of your package should appear in red text.
+10. Run `git add *` or `git add <package_name>` to add your package to the repo. Note: the command with '\*' will add all files not currently in the repo while the command with the package name will only add the specified package or file.
+11. Run `git status` to verify your package has been added to the repo.
+12. Run `git commit -m "<commit_message>"` replacing <commit_message> with a description of what you are committing to the repo.
+13. Run `git push`. 
+
 ### Unable to Contact My Own Server or 100% Packet Loss
 For when `ping <IP>` or `roscore` fails, check to see if the IPs of the devices are correct.
 
