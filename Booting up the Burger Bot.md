@@ -25,26 +25,21 @@ If there are no errors while running `roscore` or bringup, congratulations! You 
 
 ## Trouble Shooting, Mini Guides, and More
 
-### Using a New Network
-When using a new network, the IP address of the devices will change! Run though the following process to reconnect the Burger and Computer. Make sure both the Burger and the Computer are on the same network. 
-
-Power on the Burger, monitor, and Computer. Connect the Burger to the monitor using the HDMI port on the Burger's Raspberry Pi. Plug in the keyboard and mouse into the Burger. The Burger will act as a system unit or CPU and the monitor should display a basic desktop.
-
-Open a terminal (ctrl+alt+t) on the Computer and find the IP address of the Computer. Write this down and repeat on the monitor to find the Burger's IP address.
-
-Return to the Computer and in the terminal type `nano ~/.bashrc`, scroll down to the bottom. Update the IP addresses of the ROS_MASTER_URI and ROS_HOSTNAME to appear as below replacing <*IP of Computer*> and <*IP of Burger*> with the respective IP addresses:
+### Creating a Basic Launch File
+It is recommended to build a launch file to make running packages easier. A launch file starts up all specified nodes with one command `roslaunch <package_name> <file.launch>` where <package_name> is replaced with the name of the desired package and <file.launch> is a .launch file.
+1. Enter your package using `roscd <package_name>` or cd commands.
+2. Make a launch folder for launch files (you can have multiple launch files for one package). Use `mkdir launch` then `cd launch` to enter the folder.
+3. Open the Files app and navigate to the launch folder created in step 2. The path may be similar to *catkin_ws/src/<GitHub_repo>/<package_name>*.
+4. Right click anywhere in the empty space in the Files app, scroll over "New Document", and select "Empty Document". A second window should open up which looks like a text editor.
+5. Return to Files and right click on the new Untitled Document. Rename the document and end the name with ".launch" (i.e. package.launch).
+6. If the document is not already open, double click on the document to open it.
+7. In the .launch file write
 ```
-export ROS_MASTER_URI=http://<IP of Computer>:11311
-export ROS_HOSTNAME=<IP of Computer>
+<launch>
+    <node pkg="<package_name>" name="<name>" type="<file.py>" cwd="node" />
+</launch>
 ```
-Press ctrl+x and and accept any changes to exit out of the bashrc file and save any changes. Type `source ~/.bashrc` to activate any changes made.
-Repeat the nano/source process in the terminal on the monitor to match the following lines:
-```
-export ROS_MASTER_URI=http://<IP of Computer>:11311
-export ROS_HOSTNAME=<IP of Burger>
-```
-
-To finish, complete the General Process as decribed above.
+Where \<name> can be anything and <file.py> is the full name of the file where the node is defined (including the file extension). Include a definition line for each node which needs to be launched. For more details about the contents of a .launch file as well as defining parameters, see [the wiki page](http://wiki.ros.org/roslaunch/XML) and [this page](https://answers.ros.org/question/197522/introduction-on-writing-launch-files/).
 
 ### Error `alias not found` 
 For when `nano ~/.bashrc` works but `source ~/.bashrc` throws an alias error.
@@ -79,23 +74,46 @@ Whenever launching a package, turtlebot3 requires the user to first define the m
 
 First, connect to the Burger as shown above. Then type `echo 'export TURTLEBOT3_MODEL=${TB3_MODEL}' >> ~/.bashrc` into the terminal replacing ${TB3_MODEL} with the appropriate model (in our case we use `echo 'export TURTLEBOT3_MODEL=burger' >> ~/.bashrc`) and hit enter. Next, type `source ~/.bashrc` to activate the changes made. Now the model has been predefined.
 
-### Pushing a Whole New Package to a Premade GitHub Repository
+### Pushing a Developed Package to a Premade GitHub Repository
 To push an existing project to a new repository on GitHub, please follow [these](https://docs.github.com/en/github/importing-your-projects-to-github/importing-source-code-to-github/adding-an-existing-project-to-github-using-the-command-line) instructions. The instructions below are to push an existing project to an already made repo.
 1. Open the repo on github.com.
 2. Click on the green button to the top right of the files list that says "code" and select the clipboard icon next to the https link to copy the link.
 3. Open a terminal (ctrl+alt+t).
 4. Change the directory into where you wish to clone the repo. We suggest using `cd catkin_ws`, then `cd src` and cloning here.
 5. Clone the repository onto the computer with `git clone <repo_link>` replacing <repo_link> with the link copied from the step above.
-6. Backout to the root of your package (if you are working in catkin_ws the command to use is `cd catkin_ws`).
-7. Recompile your package with `catkin_make <package_name>`.
-8. Enter the repo using `roscd <repo_name>` or cd commands.
-9. Run `git status`, the name of your package should appear in red text.
-10. Run `git add *` or `git add <package_name>` to add your package to the repo. Note: the command with '\*' will add all files not currently in the repo while the command with the package name will only add the specified package or file.
-11. Run `git status` to verify your package has been added to the repo.
-12. Run `git commit -m "<commit_message>"` replacing <commit_message> with a description of what you are committing to the repo.
-13. Run `git push`. 
+6. Find the package you wish to add to the repo, then drag and drop it into the the desired location inside of the repo which was cloned in the step above.
+7. Backout to the root of your package (if you are working in catkin_ws the command to use is `cd catkin_ws`).
+8. Recompile your package with `catkin_make <package_name>`.
+9. Enter the repo using `roscd <repo_name>` or cd commands.
+10. Run `git status`, the name of your package should appear in red text.
+11. Run `git add *` or `git add <package_name>` to add your package to the repo. Note: the command with '\*' will add all files not currently in the repo while the command with the package name will only add the specified package or file.
+12. Run `git status` to verify your package has been added to the repo.
+13. Run `git commit -m "<commit_message>"` replacing <commit_message> with a description of what you are committing to the repo.
+14. Run `git push`. 
+To continue working on the project and updating to GitHub, repeat steps 9 through 14 in order to push new edits. Before starting every work session be sure to `git pull` to be working on the most up-to-date files. 
 
 ### Unable to Contact My Own Server or 100% Packet Loss
 For when `ping <IP>` or `roscore` fails, check to see if the IPs of the devices are correct.
 
 In a terminal on the Computer, find the IP address with `ifconfig`. Staying on the Computer, open a second terminal and type `nano ~/.bashrc`, scroll down and check if the master URI and host name IPs' match the Computer's current IP. Press ctrl+x and save if any changes were made. Next, access a terminal on the monitor and find the Burger's IP address. Compare it to the IP address in `nano ~/.bashrc`. Reference [Using A New Network](https://github.com/charisma-lab/burger_turtlebot/blob/main/Booting%20up%20the%20Burger%20Bot.md#using-a-new-network) above for the correct placement of each IP address. Exit the bashrc file and save any changes.
+
+### Using a New Network
+When using a new network, the IP address of the devices will change! Run though the following process to reconnect the Burger and Computer. Make sure both the Burger and the Computer are on the same network. 
+
+Power on the Burger, monitor, and Computer. Connect the Burger to the monitor using the HDMI port on the Burger's Raspberry Pi. Plug in the keyboard and mouse into the Burger. The Burger will act as a system unit or CPU and the monitor should display a basic desktop.
+
+Open a terminal (ctrl+alt+t) on the Computer and find the IP address of the Computer. Write this down and repeat on the monitor to find the Burger's IP address.
+
+Return to the Computer and in the terminal type `nano ~/.bashrc`, scroll down to the bottom. Update the IP addresses of the ROS_MASTER_URI and ROS_HOSTNAME to appear as below replacing <*IP of Computer*> and <*IP of Burger*> with the respective IP addresses:
+```
+export ROS_MASTER_URI=http://<IP of Computer>:11311
+export ROS_HOSTNAME=<IP of Computer>
+```
+Press ctrl+x and and accept any changes to exit out of the bashrc file and save any changes. Type `source ~/.bashrc` to activate any changes made.
+Repeat the nano/source process in the terminal on the monitor to match the following lines:
+```
+export ROS_MASTER_URI=http://<IP of Computer>:11311
+export ROS_HOSTNAME=<IP of Burger>
+```
+
+To finish, complete the General Process as decribed above.
