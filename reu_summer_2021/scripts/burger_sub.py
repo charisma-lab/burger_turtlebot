@@ -13,10 +13,7 @@ from std_msgs.msg import UInt16, String
 def callback(msg):
     print msg.data
 
-def burger():
-    rospy.init_node('burger', anonymous=True)
-    sub = rospy.Subscriber("feeding", String, callback, queue_size=10)
-    rospy.spin()
 
-if __name__=='_main_':
-    burger()
+rospy.init_node('burger', anonymous=True)
+sub = rospy.Subscriber("feeding", String, callback, queue_size=10)
+rospy.spin()

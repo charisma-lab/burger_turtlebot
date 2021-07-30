@@ -34,10 +34,12 @@ def lineline():
     elif speed == "fast":
         print("Lineline fast")
         pub.publish("Lineline fast")
-    else:
+    elif speed == "accelerate" or speed == "acc":
         #line line acceleration, how to calculate?
         print("Lineline acceleration")
         pub.publish("Lineline acceleration")
+    else:
+        print("Invalid speed, restarting process.")
 
 ###
 # sine line pathway option
@@ -104,7 +106,7 @@ def run():
             elif path == "sinesine":
                 sinesine()
             else:
-                print("Invalid path choice. Please choose again. To terminate the code press ctrl+c.")
+                print("Invalid path choice. Please choose again. To terminate the code press ctrl+c or ctrl+d.")
 
 if __name__ == '__main__':
     try:
