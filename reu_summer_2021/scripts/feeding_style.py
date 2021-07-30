@@ -5,22 +5,20 @@ import roslib; # roslib.load_manifest("chairbot_neato_node")
 import rospy, time
 from math import sin,cos,atan2,sqrt
 from geometry_msgs.msg import Twist
-#from geometry_msgs.msg import PoseStamped
 from std_msgs.msg import UInt16, String
-#from sensor_msgs.msg import Joy
-#from std_msgs.msg import Int8
 
 ###
 # Publisher and subscriber set up from wiki.ros.org/ROS/Tutorials/WritingPublisherSubsriber%28python%29
-###
-#def __init__(self):
-###
 # Establish pub as a global variable to publish to the topic "feeding"
 # Test if Publisher is publishing messages with `rostopic echo feeding -n 5` where -n 5 indicates echoing a maximum of 5 messages.
 ###
-pub = rospy.Publisher("feeding", String, queue_size=10)
+pub = rospy.Publisher("/cmd_vel", Twist, queue_size=10)
 rospy.init_node('computer', anonymous=True)
 rate = rospy.Rate(10) #10 Hz
+move = Twist()
+#pub = rospy.Publisher("feeding", String, queue_size=10)
+#rospy.init_node('computer', anonymous=True)
+#rate = rospy.Rate(10) #10 Hz
 
 ###
 # line line pathway option
@@ -30,7 +28,12 @@ def lineline():
     speed = userInput()
     if speed == "slow":
         print("Lineline slow")
-        pub.publish("Lineline slow")
+        move.linear.x = 0.5
+        pub.publish(move)
+        rospy.sleep(10)
+        move.linear.x=0
+        pub.publish(move)
+        print("done")
     elif speed == "fast":
         print("Lineline fast")
         pub.publish("Lineline fast")
