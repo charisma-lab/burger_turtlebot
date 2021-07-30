@@ -13,10 +13,14 @@ from std_msgs.msg import UInt16, String
 ###
 # Publisher and subscriber set up from wiki.ros.org/ROS/Tutorials/WritingPublisherSubsriber%28python%29
 ###
-def __init__(self):
-    pub = rospy.Publisher("feeding", String, queue_size=10)
-    rospy.init_node('computer', anonymous=True)
-    rate = rospy.Rate(10) #10 Hz
+#def __init__(self):
+###
+# Establish pub as a global variable to publish to the topic "feeding"
+# Test if Publisher is publishing messages with `rostopic echo feeding -n 5` where -n 5 indicates echoing a maximum of 5 messages.
+###
+pub = rospy.Publisher("feeding", String, queue_size=10)
+rospy.init_node('computer', anonymous=True)
+rate = rospy.Rate(10) #10 Hz
 
 ###
 # line line pathway option
@@ -24,7 +28,7 @@ def __init__(self):
 ###
 def lineline(): 
     speed, timer = userInput()
-    if speed == "slow"
+    if speed == "slow":
         print("Lineline slow")
         pub.publish("Lineline slow")
     elif speed == "fast":

@@ -16,7 +16,6 @@ def callback(msg):
 def burger():
     rospy.init_node('burger', anonymous=True)
     sub = rospy.Subscriber("feeding", String, callback, queue_size=10)
-
     rospy.spin()
 
 if __name__=='_main_':
