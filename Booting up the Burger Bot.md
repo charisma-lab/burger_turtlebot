@@ -45,12 +45,15 @@ Where \<name> can be anything and <file.py> is the full name of the file where t
 For when `nano ~/.bashrc` works but `source ~/.bashrc` throws an alias error.
 Re-enter `nano ~/.bashrc` and check all lines in the bashrc file to see if an alias line is spelled wrong. (e.g. `lias` instead of `alias`).
 
+### Establishing Publisher and Subscriber Nodes
+Please see pages 32-38 of [Programming Robots with ROS](https://drive.google.com/file/d/1mgKi8iFgh-3NIF7gad5OK-ws1ZvxGYp3/view). Examples 3-1 and 3-2 are images of the basic set up which can be easily manipulated. Remember to `pub.publish(<message>)` for every \<message> sent from the publisher to the subscriber.
+
 ### Finding an IP Address
 Every device has a unique IP address when it connects to a network. This address will change between different networks. To check the IP address of a device follow these steps:
 
 Open a terminal on the device (ctrl+alt+t). Type `ifconfig`. Towards the bottom of the text printed to the terminal will be a line starting with "inet addr:", the string of numbers afterwards is the IP address of the device.
 
-### \[WIP\] Making a Package
+### Making a Package
 This tutorial will closely follow the tutorial from [the ROS website](http://wiki.ros.org/ROS/Tutorials/CreatingPackage) but with less explanation and combined with [this](http://wiki.ros.org/ROS/Tutorials/WritingPublisherSubscriber%28python%29) article on setting up publisher and subcriber nodes.
 1. Assuming a catkin_ws workspace is already set up, enter your source file using `cd ~/catkin_ws/src`.
 2. Create the package using `catkin_create_pkg <package_name> [depend1] [depend2]`. As an example, to create a package with the name "beginner_tutorials" and the dependencies std_msgs, rospy, and roscpp would look like `catkin_create_pkg beginner_tutorials std_msgs rospy roscpp`.
