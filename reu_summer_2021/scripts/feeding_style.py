@@ -27,7 +27,7 @@ rate = rospy.Rate(10) #10 Hz
 # For now, only working with lineline() function to get prublisher subscriber working, ignore contents of other functions
 ###
 def lineline(): 
-    speed, timer = userInput()
+    speed = userInput()
     if speed == "slow":
         print("Lineline slow")
         pub.publish("Lineline slow")
@@ -76,28 +76,19 @@ def sinesine(self):
         sleep(timer)
 
 ###
-# Retrieves user input on the speed of the robot.
-# Returns speed (string) and timer (int)
+# Retrieves user input on the speed of the robot. Created to avoid repeated code and for clarity.
+# Returns speed (string).
 ###
 def userInput():
-    #get user input on speed
-    speed = raw_input("Enter speed: ")
-    #create timers for each speed
-    if speed=="slow":
-        timer=50
-    elif speed=="fast":
-        timer=10
-    else:
-        timer=30
-    timer = int(timer) #to resolve type issues
-    return (speed, timer)
+    speed = raw_input("Enter speed: ").lower()
+    return (speed)
 
 def run():
     #while code is still running without interrupt
     while not rospy.is_shutdown():
         while True:
             #get user input on path
-            path = raw_input("Enter path style: ")
+            path = raw_input("Enter path style: ").lower()
 
             if path == "lineline":
                 lineline()
