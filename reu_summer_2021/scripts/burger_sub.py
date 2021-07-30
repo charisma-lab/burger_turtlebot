@@ -10,9 +10,12 @@ from std_msgs.msg import UInt16, String
 #from sensor_msgs.msg import Joy
 #from std_msgs.msg import Int8
 
+def callback(msg):
+    print msg.data
+
 def burger():
     rospy.init_node('burger', anonymous=True)
-    rospy.Subscriber("feeding", String, queue_size=10)
+    sub = rospy.Subscriber("feeding", String, callback, queue_size=10)
 
     rospy.spin()
 

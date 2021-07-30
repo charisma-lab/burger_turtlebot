@@ -14,7 +14,7 @@ from std_msgs.msg import UInt16, String
 # Publisher and subscriber set up from wiki.ros.org/ROS/Tutorials/WritingPublisherSubsriber%28python%29
 ###
 def __init__(self):
-    rospy.Publisher("feeding", String, queue_size=10)
+    pub = rospy.Publisher("feeding", String, queue_size=10)
     rospy.init_node('computer', anonymous=True)
     rate = rospy.Rate(10) #10 Hz
 
@@ -24,16 +24,16 @@ def __init__(self):
 ###
 def lineline(): 
     speed, timer = userInput()
-    if speed == "slow":
+    if speed == "slow"
         print("Lineline slow")
-        sleep(20)
+        pub.publish("Lineline slow")
     elif speed == "fast":
         print("Lineline fast")
-        sleep(5)
+        pub.publish("Lineline fast")
     else:
         #line line acceleration, how to calculate?
         print("Lineline acceleration")
-        sleep(timer)
+        pub.publish("Lineline acceleration")
 
 ###
 # sine line pathway option
