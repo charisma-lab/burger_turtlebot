@@ -33,7 +33,6 @@ def lineline():
     speed = userInput()
     if speed == "slow":
         print("Running lineline slow")
-<<<<<<< HEAD
         move.linear.x = 0.05; move.linear.y = 0.0; move.linear.z = 0.0
         move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.0
         pub.publish(move)
@@ -44,11 +43,6 @@ def lineline():
         rospy.sleep(2)
         move.linear.x = 0.0; move.linear.y = 0.0; move.linear.z = 0.0
         move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.0
-=======
-        move.linear.x = 0.2
-        move.linear.y = 0.0
-        move.linear.z = 0.0
->>>>>>> 82aedd60f67c96da68cce93b707426170b2dd82f
         pub.publish(move)
     elif speed == "fast":
         print("Lineline fast")
