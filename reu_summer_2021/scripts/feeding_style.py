@@ -1,24 +1,29 @@
 #!/usr/bin/python
 
+###
+# Code closely modeled after ROS's turtlebot3_teleop_key file in turtlebot3_teleop package.
+# To access this code type `rosed turtlebot3_teleop turtlebot3_teleop_key` into a terminal.
+###
+
 #Imports for function
-import roslib; # roslib.load_manifest("chairbot_neato_node")
+import roslib
 import rospy, time
 from math import sin,cos,atan2,sqrt
 from geometry_msgs.msg import Twist
 from std_msgs.msg import UInt16, String
 
+# Global variables just for information
+BURGER_MAX_LIN_VEL = 0.22
+BURGER_MAX_ANG_VEL = 2.84
+
 ###
 # Publisher and subscriber set up from wiki.ros.org/ROS/Tutorials/WritingPublisherSubsriber%28python%29
-# Establish pub as a global variable to publish to the topic "feeding"
 # Test if Publisher is publishing messages with `rostopic echo feeding -n 5` where -n 5 indicates echoing a maximum of 5 messages.
 ###
 rospy.init_node('computer', anonymous=True)
-pub = rospy.Publisher("/cmd_vel", Twist, queue_size=10)
+pub = rospy.Publisher("cmd_vel", Twist, queue_size=10)
 rate = rospy.Rate(10) #10 Hz
 move = Twist()
-#pub = rospy.Publisher("feeding", String, queue_size=10)
-#rospy.init_node('computer', anonymous=True)
-#rate = rospy.Rate(10) #10 Hz
 
 ###
 # line line pathway option
@@ -27,13 +32,11 @@ move = Twist()
 def lineline(): 
     speed = userInput()
     if speed == "slow":
-        print("Lineline slow")
-        move.linear.x = 0.5
+        print("Running lineline slow")
+        move.linear.x = 0.2
+        move.linear.y = 0.0
+        move.linear.z = 0.0
         pub.publish(move)
-        rospy.sleep(10)
-        move.linear.x=0
-        pub.publish(move)
-        print("done")
     elif speed == "fast":
         print("Lineline fast")
         pub.publish("Lineline fast")
@@ -89,18 +92,17 @@ def userInput():
 def run():
     #while code is still running without interrupt
     while not rospy.is_shutdown():
-        while True:
-            #get user input on path
-            path = raw_input("Enter path style: ").lower()
+        path = raw_input("Enter path style: ").lower() #get user input on path
 
-            if path == "lineline":
-                lineline()
-            elif path == "sineline":
-                sineline()
-            elif path == "sinesine":
-                sinesine()
-            else:
-                print("Invalid path choice. Please choose again. To terminate the code press ctrl+c or ctrl+d.")
+        #depending on path input choose appropriate path
+        if path == "lineline":
+            lineline()
+        elif path == "sineline":
+            sineline()
+        elif path == "sinesine":
+            sinesine()
+        else:
+            print("Invalid path choice. Please choose again. To terminate the code press ctrl+c or ctrl+d.")
 
 if __name__ == '__main__':
     try:
