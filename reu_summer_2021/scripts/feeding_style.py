@@ -12,8 +12,8 @@ from std_msgs.msg import UInt16, String
 # Establish pub as a global variable to publish to the topic "feeding"
 # Test if Publisher is publishing messages with `rostopic echo feeding -n 5` where -n 5 indicates echoing a maximum of 5 messages.
 ###
-pub = rospy.Publisher("/cmd_vel", Twist, queue_size=10)
 rospy.init_node('computer', anonymous=True)
+pub = rospy.Publisher("/cmd_vel", Twist, queue_size=10)
 rate = rospy.Rate(10) #10 Hz
 move = Twist()
 #pub = rospy.Publisher("feeding", String, queue_size=10)
