@@ -25,6 +25,39 @@ If there are no errors while running `roscore` or bringup, congratulations! You 
 
 ## Trouble Shooting, Mini Guides, and More
 
+### Controlling Burger with its Motors
+Sometimes hard coding a path is easier and more consistant than manually manipulating the robot with ROS's premade teleop packages. Here's how to control the Burger's motors through code.
+```
+#imports
+import rospy
+from geometry_msgs.msg import Twist
+
+###
+#Establish a publisher on the cmd_vel topic
+# <node_name> is the name of your node, this can be anything within reason
+# move is the name of our Twist variable, you can name this anything within reason and this 
+#  variable is what gets published to the Burger
+###
+rospy.init_node('<node_name>', anonymous=True)
+pub = rospy.Publisher("cmd_vel", Twist, queue_size=10)
+rate = rospy.Rate(10) #10 Hz
+move = Twist()
+
+if __name__ == '__main__':
+    try:
+        #Controlling the motors of Burger is done specifically with the following two lines:
+        move.linear.x = 0.05; move.linear.y = 0.0; move.linear.z = 0.0
+        move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.0
+        pub.publish(move)
+    except rospy.ROSInterruptException:
+        pass
+```
+To make the Burger move forward (or backward) linearly, change the value of `move.linear.x`, to make the Burger turn, change the value of `move.angular.z`. The allowable motor values are as follows:
+* Linear: -0.22 to 0.22
+* Angular: -2.84 to 2.84
+
+Any values out of bounds will result in no movement. To have the motors run at a specific velocity for only a set duration of time, use `rospy.sleep(<#>)` after publishing \(where \<#> is the number of seconds for the desired duration). To stop all motor movement, set all six (6) linear and angular variables to `0.0`. Remember to run `pub.publish(move)` after every velocity change for the change to take affect in the Burger.
+
 ### Creating a Basic Launch File
 It is recommended to build a launch file to make running packages easier. A launch file starts up all specified nodes with one command `roslaunch <package_name> <file.launch>` where <package_name> is replaced with the name of the desired package and <file.launch> is a .launch file.
 1. Enter your package using `roscd <package_name>` or cd commands.
@@ -39,7 +72,7 @@ It is recommended to build a launch file to make running packages easier. A laun
     <node pkg="<package_name>" name="<name>" type="<file.py>" cwd="node" />
 </launch>
 ```
-Where \<name> can be anything and <file.py> is the full name of the file where the node is defined (including the file extension). Include a definition line for each node which needs to be launched. For more details about the contents of a .launch file as well as defining parameters, see [the wiki page](http://wiki.ros.org/roslaunch/XML) and [this page](https://answers.ros.org/question/197522/introduction-on-writing-launch-files/).
+Where \<name> can be anything and <file.py> is the full name of the file where the node is defined (including the file extension). Include a definition line for each node which needs to be launched. To have a node print to the terminal, add `output = "screen"` to the node's launch line. For more details about the contents of a .launch file as well as defining parameters, see [the wiki page](http://wiki.ros.org/roslaunch/XML) and [this page](https://answers.ros.org/question/197522/introduction-on-writing-launch-files/).
 
 ### Error `alias not found` 
 For when `nano ~/.bashrc` works but `source ~/.bashrc` throws an alias error.
