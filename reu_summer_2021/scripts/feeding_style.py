@@ -217,6 +217,7 @@ def run():
             sinesine()
         else:
             print("Invalid path choice. Please choose again. To terminate the code press ctrl+c or ctrl+d.")
+    stop() #stop robot on use of ctrl+c?
 
 ###
 # Main body function. Calls run() unless interrupt (ctrl+c)

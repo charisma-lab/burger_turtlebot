@@ -41,5 +41,5 @@ def callback(msg):
 # Define subscriber node.
 ###
 rospy.init_node('burger', anonymous=True)
-sub = rospy.Subscriber("cmd_vel", String, callback, queue_size=10)
+sub = rospy.Subscriber("cmd_vel", Twist, callback, queue_size=10)
 rospy.spin()

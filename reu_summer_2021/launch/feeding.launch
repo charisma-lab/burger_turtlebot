@@ -1,4 +1,3 @@
 <launch>
 	<node pkg="reu_summer_2021" name="feeding_style" type="feeding_style.py" cwd="node" output="screen"/>
-	<node pkg="reu_summer_2021" name="burger_sub" type="burger_sub.py" cwd="node" output="screen"/>
 </launch>
