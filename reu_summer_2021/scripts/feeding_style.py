@@ -17,8 +17,8 @@ from std_msgs.msg import UInt16, String
 BURGER_MAX_LIN_VEL = 0.22
 BURGER_MAX_ANG_VEL = 2.84
 # Allowable motor values are
-    # linear: -0.22 to 0.22
-    # angualr: -2.84 to 2.84
+    # linear: -0.22 to 0.22 where positive is forwards
+    # angualr: -2.84 to 2.84 where positive is left
 
 ###
 # Publisher and subscriber set up from wiki.ros.org/ROS/Tutorials/WritingPublisherSubsriber%28python%29
@@ -49,14 +49,14 @@ def lineline():
         move.linear.x = 0.02; move.linear.y = 0.0; move.linear.z = 0.0
         move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.0
         pub.publish(move)
-        rospy.sleep(40)
+        rospy.sleep(55)
         stop()
     elif speed == "fast":
         print("Running lineline fast") # Burger moves straight forward quickly
         move.linear.x = 0.2; move.linear.y = 0.0; move.linear.z = 0.0
         move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.0
         pub.publish(move)
-        rospy.sleep(20)
+        rospy.sleep(5.5)
         stop()
     elif speed == "accelerate" or speed == "acc":
         print("Running lineline acceleration") # Burger moves straight forwards while accelerating (exaggerated)
@@ -64,18 +64,30 @@ def lineline():
         move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.0
         pub.publish(move)
         rospy.sleep(4)
+        move.linear.x = 0.03; move.linear.y = 0.0; move.linear.z = 0.0
+        move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.0
+        pub.publish(move)
+        rospy.sleep(2)
         move.linear.x = 0.05; move.linear.y = 0.0; move.linear.z = 0.0
+        move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.0
+        pub.publish(move)
+        rospy.sleep(3)
+        move.linear.x = 0.07; move.linear.y = 0.0; move.linear.z = 0.0
         move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.0
         pub.publish(move)
         rospy.sleep(3)
         move.linear.x = 0.1; move.linear.y = 0.0; move.linear.z = 0.0
         move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.0
         pub.publish(move)
-        rospy.sleep(2)
-        move.linear.x = 0.2; move.linear.y = 0.0; move.linear.z = 0.0
+        rospy.sleep(1)
+        move.linear.x = 0.15; move.linear.y = 0.0; move.linear.z = 0.0
         move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.0
         pub.publish(move)
         rospy.sleep(1)
+        move.linear.x = 0.2; move.linear.y = 0.0; move.linear.z = 0.0
+        move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.0
+        pub.publish(move)
+        rospy.sleep(2)
         stop()
     else:
         print("Invalid speed, restarting process.")
@@ -84,61 +96,113 @@ def lineline():
 # SINELINE PATHWAY 
 # To access enter "sineline" when prompted for path style
 ###
-def sineline(self): 
-    speed, timer = userInput()
+def sineline(): 
+    speed = userInput()
     if speed == "slow":
         print("Running sineline slow") # 2 forward, 5r, 10l, 5r, continue straight
         move.linear.x = 0.02; move.linear.y = 0.0; move.linear.z = 0.0
-        move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.05
-        pub.publish(move)
-        rospy.sleep(6)
-        move.linear.x = 0.2; move.linear.y = 0.0; move.linear.z = 0.0
-        move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = -0.05
-        pub.publish(move)
-        rospy.sleep(7)
-        move.linear.x = 0.2; move.linear.y = 0.0; move.linear.z = 0.0
-        move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.05
-        pub.publish(move)
-        rospy.sleep(7)
-        move.linear.x = 0.2; move.linear.y = 0.0; move.linear.z = 0.0
         move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.0
         pub.publish(move)
+        rospy.sleep(5)
+        move.linear.x = 0.02; move.linear.y = 0.0; move.linear.z = 0.0
+        move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.05
+        pub.publish(move)
+        rospy.sleep(10)
+        move.linear.x = 0.02; move.linear.y = 0.0; move.linear.z = 0.0
+        move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = -0.05
+        pub.publish(move)
         rospy.sleep(20)
+        move.linear.x = 0.02; move.linear.y = 0.0; move.linear.z = 0.0
+        move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.05
+        pub.publish(move)
+        rospy.sleep(10)
+        move.linear.x = 0.02; move.linear.y = 0.0; move.linear.z = 0.0
+        move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.0
+        pub.publish(move)
+        rospy.sleep(13)
         stop()
     elif speed == "fast": # unknown
         print("Running sineline fast")
         move.linear.x = 0.2; move.linear.y = 0.0; move.linear.z = 0.0
         move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.0
         pub.publish(move)
+        rospy.sleep(0.2)
+        move.linear.x = 0.1; move.linear.y = 0.0; move.linear.z = 0.0
+        move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 1.5
+        pub.publish(move)
+        rospy.sleep(0.5)
+        move.linear.x = 0.2; move.linear.y = 0.0; move.linear.z = 0.0
+        move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.0
+        pub.publish(move)
+        rospy.sleep(0.75)
+        move.linear.x = 0.1; move.linear.y = 0.0; move.linear.z = 0.0
+        move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = -1.5
+        pub.publish(move)
         rospy.sleep(1)
+        move.linear.x = 0.2; move.linear.y = 0.0; move.linear.z = 0.0
+        move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.0
+        pub.publish(move)
+        rospy.sleep(1.5)
+        move.linear.x = 0.1; move.linear.y = 0.0; move.linear.z = 0.0
+        move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 1.5
+        pub.publish(move)
+        rospy.sleep(1.5)
+        move.linear.x = 0.2; move.linear.y = 0.0; move.linear.z = 0.0
+        move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.0
+        pub.publish(move)
+        rospy.sleep(0.5)
+        move.linear.x = 0.1; move.linear.y = 0.0; move.linear.z = 0.0
+        move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = -1.5
+        pub.publish(move)
+        rospy.sleep(0.75)
+        move.linear.x = 0.2; move.linear.y = 0.0; move.linear.z = 0.0
+        move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.0
+        pub.publish(move)
+        rospy.sleep(2)
         stop()
     elif speed == "accelerate" or speed == "acc":
         print("Running slineline acceleration") # 2 forward, 3r, 6l, 6r, 3l, accelerate to 20
         move.linear.x = 0.02; move.linear.y = 0.0; move.linear.z = 0.0
-        move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.03
+        move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.0
+        pub.publish(move)
+        rospy.sleep(5)
+        move.linear.x = 0.03; move.linear.y = 0.0; move.linear.z = 0.0
+        move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.17
         pub.publish(move)
         rospy.sleep(3)
-        move.linear.x = 0.02; move.linear.y = 0.0; move.linear.z = 0.0
-        move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = -0.03
+        move.linear.x = 0.03; move.linear.y = 0.0; move.linear.z = 0.0
+        move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.0
         pub.publish(move)
-        rospy.sleep(3)
-        move.linear.x = 0.02; move.linear.y = 0.0; move.linear.z = 0.0
-        move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.03
+        rospy.sleep(1)
+        move.linear.x = 0.03; move.linear.y = 0.0; move.linear.z = 0.0
+        move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = -0.17
+        pub.publish(move)
+        rospy.sleep(6)
+        move.linear.x = 0.03; move.linear.y = 0.0; move.linear.z = 0.0
+        move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.0
+        pub.publish(move)
+        rospy.sleep(1)
+        move.linear.x = 0.03; move.linear.y = 0.0; move.linear.z = 0.0
+        move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.17
         pub.publish(move)
         rospy.sleep(3)
         # accelerate forwards for remaining straight line
-        move.linear.x = 0.07; move.linear.y = 0.0; move.linear.z = 0.0
+        move.linear.x = 0.09; move.linear.y = 0.0; move.linear.z = 0.0
         move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.0
         pub.publish(move)
-        rospy.sleep(3)
+        rospy.sleep(2)
         move.linear.x = 0.1; move.linear.y = 0.0; move.linear.z = 0.0
         move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.0
         pub.publish(move)
-        rospy.sleep(3)
+        rospy.sleep(1)
+        move.linear.x = 0.15; move.linear.y = 0.0; move.linear.z = 0.0
+        move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.0
+        pub.publish(move)
+        rospy.sleep(1)
         move.linear.x = 0.2; move.linear.y = 0.0; move.linear.z = 0.0
         move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.0
         pub.publish(move)
-        rospy.sleep(3)
+        rospy.sleep(1)
         stop()
     else:
         print("Invalid speed, restarting process.")
@@ -147,52 +211,112 @@ def sineline(self):
 # SINESINE PATHWAY 
 # To access enter "sinesine" when prompted for path style
 ###
-def sinesine(self):
-    speed, timer = userInput()
+def sinesine():
+    speed = userInput()
     if speed == "slow":
         print("Running sinesine slow") # 3 forward, 4r, 6l, 6r, 4l
+        move.linear.x = 0.02; move.linear.y = 0.0; move.linear.z = 0.0
+        move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.0
+        pub.publish(move)
+        rospy.sleep(10) # exit curtain
         move.linear.x = 0.03; move.linear.y = 0.0; move.linear.z = 0.0
-        move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.04
+        move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.2
         pub.publish(move)
         rospy.sleep(5)
-        move.linear.x = 0.03; move.linear.y = 0.0; move.linear.z = 0.0
-        move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = -0.02
-        pub.publish(move)
-        rospy.sleep(8)
-        move.linear.x = 0.03; move.linear.y = 0.0; move.linear.z = 0.0
-        move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.04
+        move.linear.x = 0.02; move.linear.y = 0.0; move.linear.z = 0.0
+        move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.0
         pub.publish(move)
         rospy.sleep(4)
         move.linear.x = 0.03; move.linear.y = 0.0; move.linear.z = 0.0
-        move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = -0.02
+        move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = -0.2
         pub.publish(move)
-        rospy.sleep(3)
+        rospy.sleep(10)
+        move.linear.x = 0.02; move.linear.y = 0.0; move.linear.z = 0.0
+        move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.0
+        pub.publish(move)
+        rospy.sleep(10)
+        move.linear.x = 0.03; move.linear.y = 0.0; move.linear.z = 0.0
+        move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.2
+        pub.publish(move)
+        rospy.sleep(10)
+        move.linear.x = 0.02; move.linear.y = 0.0; move.linear.z = 0.0
+        move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.0
+        pub.publish(move)
+        rospy.sleep(2)
+        move.linear.x = 0.03; move.linear.y = 0.0; move.linear.z = 0.0
+        move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = -0.2
+        pub.publish(move)
+        rospy.sleep(5)
         stop()
     elif speed == "fast":
         print("Running sinesine fast") # unknown
         move.linear.x = 0.2; move.linear.y = 0.0; move.linear.z = 0.0
         move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.0
         pub.publish(move)
+        rospy.sleep(0.5)
+        move.linear.x = 0.1; move.linear.y = 0.0; move.linear.z = 0.0
+        move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 1.5
+        pub.publish(move)
+        rospy.sleep(0.5)
+        move.linear.x = 0.2; move.linear.y = 0.0; move.linear.z = 0.0
+        move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.0
+        pub.publish(move)
+        rospy.sleep(0.75)
+        move.linear.x = 0.1; move.linear.y = 0.0; move.linear.z = 0.0
+        move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = -1.5
+        pub.publish(move)
         rospy.sleep(1)
+        move.linear.x = 0.2; move.linear.y = 0.0; move.linear.z = 0.0
+        move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.0
+        pub.publish(move)
+        rospy.sleep(1.5)
+        move.linear.x = 0.1; move.linear.y = 0.0; move.linear.z = 0.0
+        move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 1.5
+        pub.publish(move)
+        rospy.sleep(1.25)
+        move.linear.x = 0.2; move.linear.y = 0.0; move.linear.z = 0.0
+        move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.0
+        pub.publish(move)
+        rospy.sleep(2)
+        move.linear.x = 0.1; move.linear.y = 0.0; move.linear.z = 0.0
+        move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = -1.5
+        pub.publish(move)
+        rospy.sleep(0.75)
         stop()
     elif speed == "accelerate" or speed == "acc":
         print("Running slinesine acceleration") # 3 forwards, 4r, 6l, 3 forward, 10r, 3l
-        move.linear.x = 0.03; move.linear.y = 0.0; move.linear.z = 0.0
-        move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.04
-        pub.publish(move)
-        rospy.sleep(1)
-        move.linear.x = 0.03; move.linear.y = 0.0; move.linear.z = 0.0
-        move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = -0.02
-        pub.publish(move)
-        rospy.sleep(1)
-        move.linear.x = 0.06; move.linear.y = 0.0; move.linear.z = 0.0
+        move.linear.x = 0.02; move.linear.y = 0.0; move.linear.z = 0.0
         move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.0
         pub.publish(move)
-        rospy.sleep(1)
-        move.linear.x = 0.03; move.linear.y = 0.0; move.linear.z = 0.0
-        move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.07
+        rospy.sleep(5) # exit curtain
+        move.linear.x = 0.02; move.linear.y = 0.0; move.linear.z = 0.0
+        move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.2
         pub.publish(move)
-        rospy.sleep(1)
+        rospy.sleep(5)
+        move.linear.x = 0.03; move.linear.y = 0.0; move.linear.z = 0.0
+        move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.0
+        pub.publish(move)
+        rospy.sleep(3.5)
+        move.linear.x = 0.05; move.linear.y = 0.0; move.linear.z = 0.0
+        move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = -0.5
+        pub.publish(move)
+        rospy.sleep(5)
+        move.linear.x = 0.1; move.linear.y = 0.0; move.linear.z = 0.0
+        move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.0
+        pub.publish(move)
+        rospy.sleep(1.25)
+        move.linear.x = 0.15; move.linear.y = 0.0; move.linear.z = 0.0
+        move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 1.5
+        pub.publish(move)
+        rospy.sleep(4.5)
+        move.linear.x = 0.18; move.linear.y = 0.0; move.linear.z = 0.0
+        move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.0
+        pub.publish(move)
+        rospy.sleep(2.2)
+        move.linear.x = 0.2; move.linear.y = 0.0; move.linear.z = 0.0
+        move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = -2
+        pub.publish(move)
+        rospy.sleep(0.75)
         stop()
     else:
         print("Invalid speed, restarting process.")
@@ -215,9 +339,12 @@ def run():
             sineline()
         elif path == "sinesine":
             sinesine()
+        elif path == "stop": 
+            # to stop the robot while its moving, terminate the current session and relaunch
+            # when prompted for path style, type "stop"
+            stop()
         else:
             print("Invalid path choice. Please choose again. To terminate the code press ctrl+c or ctrl+d.")
-    stop() #stop robot on use of ctrl+c?
 
 ###
 # Main body function. Calls run() unless interrupt (ctrl+c)
