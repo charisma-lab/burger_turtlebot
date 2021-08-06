@@ -3,6 +3,7 @@
 ###
 # Code closely modeled after ROS's turtlebot3_teleop_key file in turtlebot3_teleop package.
 # To access this code type `rosed turtlebot3_teleop turtlebot3_teleop_key` into a terminal.
+# TO CONTROL THE BURGER: moving straight is linear.x & turning is angular.z
 ###
 
 #Imports for function
@@ -29,8 +30,6 @@ pub = rospy.Publisher("cmd_vel", Twist, queue_size=10)
 rate = rospy.Rate(10) #10 Hz
 move = Twist()
 
-#TO CONTROL THE BURGER: moving straight is linear.x & turning is angular.z
-
 ###
 # To avoid repeated code. Stops all motor movement in Burger
 ###
@@ -40,12 +39,12 @@ def stop():
     pub.publish(move)
 
 ###
-# line line pathway option
-# For now, only working with lineline() function to get prublisher subscriber working, ignore contents of other functions
+# LINELINE PATHWAY 
+# To access enter "lineline" when prompted for path style
 ###
 def lineline(): 
     speed = userInput()
-    if speed == "slow": # Burger moves straight forward for 40 seconds
+    if speed == "slow": # Burger moves straight forward slowly
         print("Running lineline slow")
         move.linear.x = 0.05; move.linear.y = 0.0; move.linear.z = 0.0
         move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.0
@@ -53,48 +52,87 @@ def lineline():
         rospy.sleep(40)
         stop()
     elif speed == "fast":
-        print("Lineline fast")
-        pub.publish("Lineline fast")
+        print("Running lineline fast") # Burger moves straight forward quickly
+        move.linear.x = 0.2; move.linear.y = 0.0; move.linear.z = 0.0
+        move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.0
+        pub.publish(move)
+        rospy.sleep(20)
+        stop()
     elif speed == "accelerate" or speed == "acc":
-        #line line acceleration, how to calculate?
-        print("Lineline acceleration")
-        pub.publish("Lineline acceleration")
+        print("Running lineline acceleration") # Burger moves straight forwards while accelerating (exaggerated)
+        move.linear.x = 0.05; move.linear.y = 0.0; move.linear.z = 0.0
+        move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.0
+        pub.publish(move)
+        rospy.sleep(4)
+        move.linear.x = 0.07; move.linear.y = 0.0; move.linear.z = 0.0
+        move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.0
+        pub.publish(move)
+        rospy.sleep(3)
+        move.linear.x = 0.1; move.linear.y = 0.0; move.linear.z = 0.0
+        move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.0
+        pub.publish(move)
+        rospy.sleep(2)
+        move.linear.x = 0.2; move.linear.y = 0.0; move.linear.z = 0.0
+        move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.0
+        pub.publish(move)
+        rospy.sleep(1)
+        stop()
     else:
         print("Invalid speed, restarting process.")
 
 ###
-# sine line pathway option
-# still need to calculate pathway, look at 'discarded lit search papers' for more
+# SINELINE PATHWAY 
+# To access enter "sineline" when prompted for path style
 ###
 def sineline(self): 
     speed, timer = userInput()
     if speed == "slow":
-        self._robot.setMotors(0, 200, 50)
-        sleep(timer)
+        print("Running sineline slow")
+        move.linear.x = 0.2; move.linear.y = 0.0; move.linear.z = 0.0
+        move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.0
+        pub.publish(move)
+        rospy.sleep(1)
     elif speed == "fast":
-        self._robot.setMotors(0, 200, 200)
-        sleep(timer)
+        print("Running sineline fast")
+        move.linear.x = 0.2; move.linear.y = 0.0; move.linear.z = 0.0
+        move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.0
+        pub.publish(move)
+        rospy.sleep(1)
+    elif speed == "accelerate" or speed == "acc":
+        print("Running slineline acceleration") # 2 forward, 3r, 6l, 6r, 3l, accelerate to 20
+        move.linear.x = 0.2; move.linear.y = 0.0; move.linear.z = 0.0
+        move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.0
+        pub.publish(move)
+        rospy.sleep(1)
     else:
-         # line line acceleration, how to calculate?
-        self._robot.setMotors(0, 200, speed)
-        sleep(timer)
+        print("Invalid speed, restarting process.")
 
 ###
-# sine sine pathway option
-# still need to calculate pathway, look at 'discarded lit search papers' for more
+# SINESINE PATHWAY 
+# To access enter "sinesine" when prompted for path style
 ###
 def sinesine(self):
     speed, timer = userInput()
     if speed == "slow":
-        self._robot.setMotors(0, 200, 50)
-        sleep(timer)
+        print("Running sinesine slow") # 3 forward, 4r, 6l, 6r, 4l
+        move.linear.x = 0.2; move.linear.y = 0.0; move.linear.z = 0.0
+        move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.0
+        pub.publish(move)
+        rospy.sleep(1)
     elif speed == "fast":
-        self._robot.setMotors(0, 200, 200)
-        sleep(timer)
+        print("Running sinesine fast") # 
+        move.linear.x = 0.2; move.linear.y = 0.0; move.linear.z = 0.0
+        move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.0
+        pub.publish(move)
+        rospy.sleep(1)
+    elif speed == "accelerate" or speed == "acc":
+        print("Running slinesine acceleration") # 3 forwards, 4r, 6l, 3 forward, 10r, 3l
+        move.linear.x = 0.2; move.linear.y = 0.0; move.linear.z = 0.0
+        move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.0
+        pub.publish(move)
+        rospy.sleep(1)
     else:
-        # line line acceleration, how to calculate?
-        self._robot.setMotors(0, 200, speed)
-        sleep(timer)
+        print("Invalid speed, restarting process.")
 
 ###
 # Retrieves user input on the speed of the robot. Created to avoid repeated code and for clarity.
@@ -105,11 +143,9 @@ def userInput():
     return (speed)
 
 def run():
-    #while code is still running without interrupt
-    while not rospy.is_shutdown():
-        path = raw_input("Enter path style: ").lower() #get user input on path
-
-        #depending on path input choose appropriate path
+    while not rospy.is_shutdown(): #while code is still running without interrupt (ctrl+d)
+        path = raw_input("Enter path style: ").lower() #get user input on path, ignore capitalization
+        #depending on path input choose appropriate path function
         if path == "lineline":
             lineline()
         elif path == "sineline":
@@ -119,6 +155,9 @@ def run():
         else:
             print("Invalid path choice. Please choose again. To terminate the code press ctrl+c or ctrl+d.")
 
+###
+# Main body function. Calls run() unless interrupt (ctrl+c)
+###
 if __name__ == '__main__':
     try:
         run()
