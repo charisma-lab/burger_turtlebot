@@ -91,19 +91,19 @@ def sineline(self):
         move.linear.x = 0.02; move.linear.y = 0.0; move.linear.z = 0.0
         move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.05
         pub.publish(move)
-        rospy.sleep(3)
+        rospy.sleep(6)
         move.linear.x = 0.2; move.linear.y = 0.0; move.linear.z = 0.0
         move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = -0.05
         pub.publish(move)
-        rospy.sleep(1)
+        rospy.sleep(7)
         move.linear.x = 0.2; move.linear.y = 0.0; move.linear.z = 0.0
         move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.05
         pub.publish(move)
-        rospy.sleep(4)
+        rospy.sleep(7)
         move.linear.x = 0.2; move.linear.y = 0.0; move.linear.z = 0.0
         move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.0
         pub.publish(move)
-        rospy.sleep(2)
+        rospy.sleep(20)
         stop()
     elif speed == "fast": # unknown
         print("Running sineline fast")
@@ -154,19 +154,19 @@ def sinesine(self):
         move.linear.x = 0.03; move.linear.y = 0.0; move.linear.z = 0.0
         move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.04
         pub.publish(move)
-        rospy.sleep(1)
+        rospy.sleep(5)
         move.linear.x = 0.03; move.linear.y = 0.0; move.linear.z = 0.0
         move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = -0.02
         pub.publish(move)
-        rospy.sleep(1)
+        rospy.sleep(8)
         move.linear.x = 0.03; move.linear.y = 0.0; move.linear.z = 0.0
         move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.04
         pub.publish(move)
-        rospy.sleep(1)
+        rospy.sleep(4)
         move.linear.x = 0.03; move.linear.y = 0.0; move.linear.z = 0.0
-        move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.0
+        move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = -0.02
         pub.publish(move)
-        rospy.sleep(1)
+        rospy.sleep(3)
         stop()
     elif speed == "fast":
         print("Running sinesine fast") # unknown
