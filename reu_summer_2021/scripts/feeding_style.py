@@ -134,7 +134,7 @@ def sineline():
         move.linear.x = 0.2; move.linear.y = 0.0; move.linear.z = 0.0
         move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.0
         pub.publish(move)
-        rospy.sleep(0.75)
+        rospy.sleep(0.5)
         move.linear.x = 0.1; move.linear.y = 0.0; move.linear.z = 0.0
         move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = -1.5
         pub.publish(move)
@@ -142,11 +142,11 @@ def sineline():
         move.linear.x = 0.2; move.linear.y = 0.0; move.linear.z = 0.0
         move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.0
         pub.publish(move)
-        rospy.sleep(1.5)
+        rospy.sleep(1)
         move.linear.x = 0.1; move.linear.y = 0.0; move.linear.z = 0.0
         move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 1.5
         pub.publish(move)
-        rospy.sleep(1.5)
+        rospy.sleep(1.3)
         move.linear.x = 0.2; move.linear.y = 0.0; move.linear.z = 0.0
         move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.0
         pub.publish(move)
@@ -154,7 +154,7 @@ def sineline():
         move.linear.x = 0.1; move.linear.y = 0.0; move.linear.z = 0.0
         move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = -1.5
         pub.publish(move)
-        rospy.sleep(0.75)
+        rospy.sleep(0.74)
         move.linear.x = 0.2; move.linear.y = 0.0; move.linear.z = 0.0
         move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.0
         pub.publish(move)
@@ -342,6 +342,13 @@ def run():
         elif path == "stop": 
             # to stop the robot while its moving, terminate the current session and relaunch
             # when prompted for path style, type "stop"
+            stop()
+        elif path == "recall":
+            print("recalling.")
+            move.linear.x = -0.1; move.linear.y = 0.0; move.linear.z = 0.0
+            move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.0
+            pub.publish(move)
+            rospy.sleep(15)
             stop()
         else:
             print("Invalid path choice. Please choose again. To terminate the code press ctrl+c or ctrl+d.")
