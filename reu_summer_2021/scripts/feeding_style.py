@@ -253,7 +253,7 @@ def sinesine():
         move.linear.x = 0.2; move.linear.y = 0.0; move.linear.z = 0.0
         move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.0
         pub.publish(move)
-        rospy.sleep(0.5)
+        rospy.sleep(1)
         move.linear.x = 0.1; move.linear.y = 0.0; move.linear.z = 0.0
         move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 1.5
         pub.publish(move)
@@ -273,11 +273,11 @@ def sinesine():
         move.linear.x = 0.1; move.linear.y = 0.0; move.linear.z = 0.0
         move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 1.5
         pub.publish(move)
-        rospy.sleep(1.25)
+        rospy.sleep(1.15)
         move.linear.x = 0.2; move.linear.y = 0.0; move.linear.z = 0.0
         move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.0
         pub.publish(move)
-        rospy.sleep(2.25)
+        rospy.sleep(1.5)
         move.linear.x = 0.1; move.linear.y = 0.0; move.linear.z = 0.0
         move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = -1.5
         pub.publish(move)
