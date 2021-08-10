@@ -87,7 +87,7 @@ def lineline():
         move.linear.x = 0.2; move.linear.y = 0.0; move.linear.z = 0.0
         move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.0
         pub.publish(move)
-        rospy.sleep(2)
+        rospy.sleep(1.75)
         stop()
     else:
         print("Invalid speed, restarting process.")
@@ -150,15 +150,15 @@ def sineline():
         move.linear.x = 0.2; move.linear.y = 0.0; move.linear.z = 0.0
         move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.0
         pub.publish(move)
-        rospy.sleep(0.5)
+        rospy.sleep(0.2)
         move.linear.x = 0.1; move.linear.y = 0.0; move.linear.z = 0.0
         move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = -1.5
         pub.publish(move)
-        rospy.sleep(0.74)
+        rospy.sleep(0.75)
         move.linear.x = 0.2; move.linear.y = 0.0; move.linear.z = 0.0
         move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.0
         pub.publish(move)
-        rospy.sleep(2)
+        rospy.sleep(2.5)
         stop()
     elif speed == "accelerate" or speed == "acc":
         print("Running slineline acceleration") # 2 forward, 3r, 6l, 6r, 3l, accelerate to 20
@@ -226,7 +226,7 @@ def sinesine():
         move.linear.x = 0.02; move.linear.y = 0.0; move.linear.z = 0.0
         move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.0
         pub.publish(move)
-        rospy.sleep(4)
+        rospy.sleep(3)
         move.linear.x = 0.03; move.linear.y = 0.0; move.linear.z = 0.0
         move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = -0.2
         pub.publish(move)
@@ -242,7 +242,7 @@ def sinesine():
         move.linear.x = 0.02; move.linear.y = 0.0; move.linear.z = 0.0
         move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.0
         pub.publish(move)
-        rospy.sleep(2)
+        rospy.sleep(1)
         move.linear.x = 0.03; move.linear.y = 0.0; move.linear.z = 0.0
         move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = -0.2
         pub.publish(move)
@@ -257,7 +257,7 @@ def sinesine():
         move.linear.x = 0.1; move.linear.y = 0.0; move.linear.z = 0.0
         move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 1.5
         pub.publish(move)
-        rospy.sleep(0.5)
+        rospy.sleep(0.75)
         move.linear.x = 0.2; move.linear.y = 0.0; move.linear.z = 0.0
         move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.0
         pub.publish(move)
@@ -265,11 +265,11 @@ def sinesine():
         move.linear.x = 0.1; move.linear.y = 0.0; move.linear.z = 0.0
         move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = -1.5
         pub.publish(move)
-        rospy.sleep(1)
+        rospy.sleep(1.5)
         move.linear.x = 0.2; move.linear.y = 0.0; move.linear.z = 0.0
         move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.0
         pub.publish(move)
-        rospy.sleep(1.5)
+        rospy.sleep(1.7)
         move.linear.x = 0.1; move.linear.y = 0.0; move.linear.z = 0.0
         move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 1.5
         pub.publish(move)
@@ -277,11 +277,15 @@ def sinesine():
         move.linear.x = 0.2; move.linear.y = 0.0; move.linear.z = 0.0
         move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.0
         pub.publish(move)
-        rospy.sleep(2)
+        rospy.sleep(2.25)
         move.linear.x = 0.1; move.linear.y = 0.0; move.linear.z = 0.0
         move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = -1.5
         pub.publish(move)
-        rospy.sleep(0.75)
+        rospy.sleep(0.4)
+        move.linear.x = 0.1; move.linear.y = 0.0; move.linear.z = 0.0
+        move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.0
+        pub.publish(move)
+        rospy.sleep(0.5)
         stop()
     elif speed == "accelerate" or speed == "acc":
         print("Running slinesine acceleration") # 3 forwards, 4r, 6l, 3 forward, 10r, 3l
@@ -300,7 +304,7 @@ def sinesine():
         move.linear.x = 0.05; move.linear.y = 0.0; move.linear.z = 0.0
         move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = -0.5
         pub.publish(move)
-        rospy.sleep(5)
+        rospy.sleep(4.5)
         move.linear.x = 0.1; move.linear.y = 0.0; move.linear.z = 0.0
         move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.0
         pub.publish(move)
@@ -308,7 +312,7 @@ def sinesine():
         move.linear.x = 0.15; move.linear.y = 0.0; move.linear.z = 0.0
         move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 1.5
         pub.publish(move)
-        rospy.sleep(4.5)
+        rospy.sleep(4)
         move.linear.x = 0.18; move.linear.y = 0.0; move.linear.z = 0.0
         move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.0
         pub.publish(move)
@@ -316,7 +320,7 @@ def sinesine():
         move.linear.x = 0.2; move.linear.y = 0.0; move.linear.z = 0.0
         move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = -2
         pub.publish(move)
-        rospy.sleep(0.75)
+        rospy.sleep(0.5)
         stop()
     else:
         print("Invalid speed, restarting process.")
@@ -348,7 +352,7 @@ def run():
             move.linear.x = -0.1; move.linear.y = 0.0; move.linear.z = 0.0
             move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.0
             pub.publish(move)
-            rospy.sleep(15)
+            rospy.sleep(11.5)
             stop()
         else:
             print("Invalid path choice. Please choose again. To terminate the code press ctrl+c or ctrl+d.")
