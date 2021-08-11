@@ -44,7 +44,14 @@ def stop():
 ###
 def lineline(): 
     speed = userInput()
-    if speed == "slow": # Burger moves straight forward slowly
+    if speed == "moderate" or "normal":
+        print ("Running lineline normal")
+        move.linear.x = 0.1; move.linear.y = 0.0; move.linear.z = 0.0
+        move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.0
+        pub.publish(move)
+        rospy.sleep(11)
+        stop()
+    elif speed == "slow": # Burger moves straight forward slowly
         print("Running lineline slow")
         move.linear.x = 0.02; move.linear.y = 0.0; move.linear.z = 0.0
         move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.0
@@ -91,6 +98,32 @@ def lineline():
         stop()
     else:
         print("Invalid speed, restarting process.")
+
+###
+# CURVE PATHWAY
+# To access enter "curve" when prompted for path style
+###
+def curve():
+    speed = userInput()
+    if speed == "moderate" or "normal":
+        print("Running curve normal")
+        move.linear.x = 0.1; move.linear.y = 0.0; move.linear.z = 0.0
+        move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.0
+        pub.publish(move)
+        rospy.sleep(2)
+        move.linear.x = 0.06; move.linear.y = 0.0; move.linear.z = 0.0
+        move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = -1
+        pub.publish(move)
+        rospy.sleep(0.5)
+        move.linear.x = 0.1; move.linear.y = 0.0; move.linear.z = 0.0
+        move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.0
+        pub.publish(move)
+        rospy.sleep(2)
+        move.linear.x = 0.1; move.linear.y = 0.0; move.linear.z = 0.0
+        move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.2
+        pub.publish(move)
+        rospy.sleep(7.5)
+        stop()
 
 ###
 # SINELINE PATHWAY 
@@ -213,7 +246,29 @@ def sineline():
 ###
 def sinesine():
     speed = userInput()
-    if speed == "slow":
+    if speed == "moderate" or "normal":
+        move.linear.x = 0.1; move.linear.y = 0.0; move.linear.z = 0.0
+        move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.0
+        pub.publish(move)
+        rospy.sleep(1)
+        move.linear.x = 0.1; move.linear.y = 0.0; move.linear.z = 0.0
+        move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.5
+        pub.publish(move)
+        rospy.sleep(2.2)
+        move.linear.x = 0.1; move.linear.y = 0.0; move.linear.z = 0.0
+        move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = -0.5
+        pub.publish(move)
+        rospy.sleep(3)
+        move.linear.x = 0.1; move.linear.y = 0.0; move.linear.z = 0.0
+        move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.0
+        pub.publish(move)
+        rospy.sleep(4.5)
+        move.linear.x = 0.1; move.linear.y = 0.0; move.linear.z = 0.0
+        move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.5
+        pub.publish(move)
+        rospy.sleep(1.5)
+        stop()
+    elif speed == "slow":
         print("Running sinesine slow") # 3 forward, 4r, 6l, 6r, 4l
         move.linear.x = 0.02; move.linear.y = 0.0; move.linear.z = 0.0
         move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.0
@@ -343,6 +398,8 @@ def run():
             sineline()
         elif path == "sinesine":
             sinesine()
+        elif path == "curve":
+            curve()
         elif path == "stop": 
             # to stop the robot while its moving, terminate the current session and relaunch
             # when prompted for path style, type "stop"
