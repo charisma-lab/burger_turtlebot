@@ -44,7 +44,7 @@ def stop():
 ###
 def lineline(): 
     speed = userInput()
-    if speed == "moderate" or "normal":
+    if speed == "normal":
         print ("Running lineline normal")
         move.linear.x = 0.1; move.linear.y = 0.0; move.linear.z = 0.0
         move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.0
@@ -65,7 +65,7 @@ def lineline():
         pub.publish(move)
         rospy.sleep(5.5)
         stop()
-    elif speed == "accelerate" or speed == "acc":
+    elif speed == "accelerat" or speed == "ac":
         print("Running lineline acceleration") # Burger moves straight forwards while accelerating (exaggerated)
         move.linear.x = 0.02; move.linear.y = 0.0; move.linear.z = 0.0
         move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.0
@@ -105,7 +105,7 @@ def lineline():
 ###
 def curve():
     speed = userInput()
-    if speed == "moderate" or "normal":
+    if speed == "normal":
         print("Running curve normal")
         move.linear.x = 0.1; move.linear.y = 0.0; move.linear.z = 0.0
         move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.0
@@ -246,7 +246,7 @@ def sineline():
 ###
 def sinesine():
     speed = userInput()
-    if speed == "moderate" or "normal":
+    if speed == "normal":
         move.linear.x = 0.1; move.linear.y = 0.0; move.linear.z = 0.0
         move.angular.x = 0.0; move.angular.y = 0.0; move.angular.z = 0.0
         pub.publish(move)
